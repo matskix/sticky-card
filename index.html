@@ -1,1 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Sticky Cards + Canvas — Export / Import XML (Fixed)</title>
+<link rel="stylesheet" href="style.css">
 
+</head>
+<body>
+<canvas id="drawingCanvas"></canvas>
+
+<div class="toolbar" aria-label="Toolbar" id="toolbar">
+  <button id="addDraggableBtn" title="Add Card" aria-label="Add Card">➕</button>
+  <button id="changeBackgroundBtn" title="Change Background" aria-label="Change Background">🖼️</button>
+  <button id="togglePenBtn" title="Toggle Drawing" aria-label="Toggle Drawing">✏️</button>
+  <button id="eraseBtn" title="Erase Options" aria-label="Erase Options">🧹</button>
+  <button id="undoBtn" title="Undo" aria-label="Undo">↩️</button>
+  <button id="redoBtn" title="Redo" aria-label="Redo">↪️</button>
+  <button id="exportXmlBtn" title="Export workspace" aria-label="Export Workspace">⤓</button>
+  <button id="importXmlBtn" title="Import workspace" aria-label="Import Workspace">📂</button>
+  <button id="instructionsBtn" title="Instructions" aria-label="Instructions">❓</button>
+  <button id="aboutBtn" class="toolbar-btn" title="About This App" aria-label="About">ℹ️</button>
+  <input id="colorPicker" type="color" value="#d3d3d3" title="Pick a Color" aria-label="Pen / Card Color" />
+</div>
+
+<div id="gridSliderContainer" aria-label="Grid Size">
+  <label class="grid-label" for="gridSizeSlider">📏</label>
+  <input id="gridSizeSlider" type="range" min="5" max="50" value="10" />
+  <div id="gridValue">10px</div>
+</div>
+
+<button id="toggleDarkModeBtn" title="Toggle theme" aria-label="Toggle Dark Mode" style="position:fixed;top:6px; right:10px; z-index:1100;">🌙</button>
+<button id="fullscreen-btn" title="Toggle fullscreen" aria-label="Toggle fullscreen">⛶</button>
+
+<input id="backgroundInput" type="file" accept="image/*" />
+<input id="xmlInput" type="file" accept=".xml,application/xml" />
+
+<!-- Erase Modal -->
+<div id="eraseModal" class="modal" role="dialog" aria-modal="true">
+  <div class="modal-content">
+    <h2>Erase options</h2>
+    <button class="erase-option" data-option="1">🖍️ Erase drawings</button>
+    <button class="erase-option" data-option="2">📝 Erase sticky cards</button>
+    <button class="erase-option" data-option="3">🖼️ Remove background</button>
+    <button class="erase-option" data-option="4">🧹 Erase EVERYTHING</button>
+    <button id="closeModal">Cancel</button>
+  </div>
+</div>
+
+<!-- Instructions Modal -->
+<div id="instructionsModal" class="modal" role="dialog" aria-modal="true">
+  <div class="modal-content">
+     <h2>Instructions</h2>
+
+     <strong>
+      
+     <p>Welcome! Here's how to use the app:</p>
+     <ul style="text-align:left;">
+       <li>➕ Add sticky cards</li>
+       <li>✏️ Toggle drawing mode</li>
+       <li>🧹 Erase cards, drawings, or background</li>
+       <li>⤓ Export your workspace to XML</li>
+       <li>📂 Import a saved XML workspace</li>
+       <li>⛶ Toggle fullscreen</li>
+       <li>🌙/☀️ Toggle theme</li>
+     </ul>
+     
+     
+     <p>Use Cases</p>
+      
+      <ul style="text-align:left;">
+       
+        <li> KANBAN BOARD</li>
+        <li>Tracking Project Progress</li>
+        <li>Group Project Brainstorming Session</li>
+        <li>Used to design a manufacturing process</li>
+        <li>Sticky note for quick, short-term notes.</li>
+
+       </ul>
+
+         <p>Contact Us</p>
+         <p>matskix@gmail.com</p>
+
+      </strong>
+
+     <button id="closeInstructionsBtn">Close</button>
+  </div>
+</div>
+
+<div id="aboutModal" class="modal" role="dialog" aria-modal="true">
+  <div class="modal-content">
+    <span class="close" id="closeAboutBtn" role="button" aria-label="Close About">&times;</span>
+    <h2>About</h2>
+    <p>
+      🗒️ <strong>Sticky Card</strong><br>
+      Version: <b>1.0</b><br>
+      Sticky Card began with a simple idea — to reinvent traditional sticky notes by making them digital and semi-decentralized. What started in manufacturing has now evolved into a modern platform that combines simplicity, security, and accessibility.
+    </p>
+    <p>
+      This site does not collect any user data, ensuring that your notes, ideas, and projects remain completely private.
+    </p>
+    <p>
+      To enhance privacy and data ownership, Sticky Card uses an XML-based export/import system. Only users with the correct XML file can open or read a workspace, keeping your projects secure. Read-only copies can be edited and saved as new workspaces.
+    </p>
+    <p>
+      All your notes and brainstorming sessions are automatically saved in your browser’s localStorage. You can also export your workspace as an XML file to back up, share, or transfer your data.
+    </p>
+    <p>
+      Developed by <strong>George Bravo (aka MATSKIX) with openAI</strong> and ❤️ <br> Powered by HTML, CSS, and JavaScript.
+    </p>
+  </div>
+</div>
+
+<!-- Google tag (gtag.js) -->
+
+<script src="script.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0SKY33QHBN"></script>
+
+</body>
+</html>
