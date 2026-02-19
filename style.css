@@ -1,1 +1,119 @@
+:root { --panel: #000000cc; --panel-dark:#222222cc; }
+html,body{height:100%; margin:0;}
+body {
+   margin:0; font-family: Arial, sans-serif;
+   transition: background-color .25s,color .25s;
+   background:#fff; color:#000;
+   background-size:cover; background-repeat:no-repeat;
+   background-position:center; background-attachment:fixed;
+   overflow:hidden;
+}
+body.dark-mode { background:#1e1e1e; color:#eee; }
 
+.draggable {
+   position:absolute; cursor:grab; display:flex; flex-direction:column;
+   width:250px; height:100px;
+   min-width:100px; min-height:50px; max-width:500px; max-height:300px;
+   border:1px solid #ccc; box-shadow:0 1px 1px rgba(0,0,0,.2); z-index:1;
+   background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+   background-repeat:repeat;
+   resize: horizontal; overflow:auto;
+   animation: fadeInScale .35s ease-out;
+}
+@keyframes fadeInScale { from{opacity:0; transform:scale(.9)} to{opacity:1; transform:scale(1)} }
+
+.draggable input { 
+   width:99%;
+   margin:1px; 
+   font-size:16px;
+   text-align:center; 
+   text-transform:uppercase; 
+   font-weight:700; 
+   border:1px solid #ccc; 
+   box-sizing:border-box; opacity:.95; }
+
+.resize-handle {
+   width:15px;height:15px;
+   background:#333;
+   position:absolute;
+   bottom:1px; 
+   right:1px;
+   cursor:se-resize;
+   display:none; 
+   border-radius:3px; 
+   opacity:.6; 
+}
+.draggable:hover .resize-handle{ 
+  display:block; 
+}
+.delete-btn{ 
+  display:none; 
+  position:absolute;
+  top:0; 
+  right:0; 
+  border:none; 
+  background:black;
+  color:#fff;
+  width:20px; 
+  height:20px; 
+  font-weight:700; 
+  font-size:14px; 
+  cursor:pointer; 
+  opacity:.6; 
+  z-index:999;
+}
+.draggable:hover .delete-btn{ 
+  display:block; }
+.notch{ 
+  position:absolute; width:12px; height:12px; background:inherit; box-shadow:0 0 0 1px #ccc; clip-path:polygon(0 100%,100% 100%,100% 0); 
+}
+.notch-left { 
+  bottom:0; left:0; transform:rotate(180deg); 
+}
+.notch-right { 
+ bottom:0; right:0; 
+}
+body.dark-mode .draggable {
+ background-color:#333 !important; color:#eee; border:1px solid #666; 
+}
+body.dark-mode .draggable input { 
+background:#444; color:#eee; border:1px solid #666; 
+}
+body.dark-mode .delete-btn { 
+background:#eee; color:#000; }
+
+.toolbar { position:fixed; top:50%; left:0; transform:translateY(-50%); display:flex; flex-direction:column; background:var(--panel); border-top-right-radius:8px; border-bottom-right-radius:8px; padding:8px 6px; z-index:1100; align-items:center; }
+.toolbar button { background:#fff; border:none; margin:6px 4px; padding:10px; font-size:17px; font-weight:700; color:#000; cursor:pointer; border-radius:10px; width:48px; height:48px; opacity:.95; }
+.toolbar button:hover{ background:#007bff; color:#fff; transform:scale(1.05); }
+body.dark-mode .toolbar{ background:var(--panel-dark); }
+body.dark-mode .toolbar button{ background:#444; color:#eee; }
+body.dark-mode .toolbar button:hover{ background:#666; }
+
+#colorPicker { margin-top:8px; width:40px; height:40px; border-radius:50%; border:none; cursor:pointer; }
+
+#gridSliderContainer { position:fixed; bottom:5px; right:1000px; display:flex; flex-direction:column; align-items:center; z-index:1100; }
+#gridSizeSlider { transform:rotate(0deg); transform-origin:center bottom; width:100px; height:20px; margin-bottom:4px; opacity:.9; }
+#gridValue { font-size:14px; font-weight:700; padding:2px 6px; color:#fff; background:#000000aa; border-radius:4px; }
+body.dark-mode #gridValue{ background:#ffffff22; color:#eee; }
+
+#drawingCanvas { position:fixed; top:0; left:0; z-index:999; pointer-events:none; width:100vw; height:100vh; }
+body.drawing-mode #drawingCanvas { pointer-events:auto; cursor:crosshair; }
+canvas { position:absolute; top:0; left:0; width:100vw; height:100vh; z-index:0; }
+
+#fullscreen-btn { position:fixed; bottom:20px; right:20px; width:60px; height:60px; border-radius:8px; border:none; background:#000; color:#fff; font-size:32px; z-index:1100; opacity:.8; cursor:pointer; }
+
+/* --- Modal (single definition) --- */
+.modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.55); justify-content: center; align-items: center; animation: fadeIn 0.3s ease-in-out; }
+.modal-content { background-color: var(--modal-bg, #ffffff); color: var(--modal-text, #000000); padding: 20px; border-radius: 12px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); width: 420px; max-width: 90%; animation: slideDown 0.3s ease-in-out; text-align: center; line-height: 1.6; font-size: 15px; }
+.close { float: right; font-size: 22px; font-weight: bold; cursor: pointer; color: var(--modal-text, #000); }
+.close:hover { color: #e74c3c; }
+body.light-mode { --modal-bg: #ffffff; --modal-text: #222222; }
+body.dark-mode { --modal-bg: #222222; --modal-text: #f5f5f5; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideDown { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+.erase-option{ display:block; width:100%; margin:8px 0; padding:10px; background:#000; color:#fff; border:none; border-radius:6px; cursor:pointer; }
+.erase-option:hover{ background:#007bff; }
+#closeModal{ margin-top:12px; background:#ff5e5e; color:#fff; }
+
+#xmlInput, #backgroundInput { display:none; }
