@@ -12,3 +12,5 @@ All your notes and brainstorming sessions are automatically saved in your browse
 
 Developed by George Bravo (aka MATSKIX) with ChatGPT and ❤️
 Powered by HTML, CSS, and JavaScript. 
+
+https://stickycard.rf.gd/
